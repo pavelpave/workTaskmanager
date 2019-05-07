@@ -7,37 +7,39 @@ import './styles/style.css'
 class TrTable extends Component {
     constructor(props){
         super(props)
-        console.log(props);
-        
         this.state = props.state
-        this.cklicked = this.cklicked.bind(this)
+        this.trRenderTable = this.trRenderTable.bind(this)
+        this.rerenderTask = props.rerenderTask
     }
-    cklicked(){
-        if(this.state.opis){
-        this.state.opis = false
-        }else{
-            this.state.opis = true   
-        }
-        this.setState(this.state)
-    }
-    render(){
-        return(
+    
+    trRenderTable(){
+       
+        return  this.state.opisTask.map((el,i) =>{
             
-            <tr className='row_style'>
-                <th scope="row">1</th>
+            return(
+                <tr className='row_style' key={i}>
+                <th scope="row">{el.id}</th>
                 <td >
-                    <FlagWork />
+                    <FlagWork el={el} />
                 </td>
                 <td>
-                    <GroupButton />
+                    <GroupButton el={el} state={ this.state} rerenderTask={this.rerenderTask}/>
                 </td>
-                <td  onClick={this.cklicked}>
-                    <OpisTask />
+                <td>
+                    <OpisTask el={el} state={ this.state}/>
                 </td>
-                 {this.state.opis ? <Podrob />: console.log('1')}
+                 {this.state.opis ? <Podrob />: <td></td>}
             </tr>
-           
-           
+            )
+        })
+        
+    }
+    render(){
+       
+        return(
+            <>
+                 { this.trRenderTable() }        
+            </>
         )
     }
 }

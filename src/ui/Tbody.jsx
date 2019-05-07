@@ -7,16 +7,16 @@ class Tbody extends Component{
   constructor(props) {
     super(props);
     this.state = props.state
-    console.log(this.state);
+    this.rerenderTask = props.rerenderTask
     
   }
   
     render(){
+      
         return(
               <tbody>
-                  <TrTable state={ this.state}/>
-                  <TrTable state={ this.state}/>
-                  <TrTable state={ this.state}/>
+                  <TrTable state={ this.state} rerenderTask={ this.rerenderTask}/>               
+                
             </tbody>
         )
     }
